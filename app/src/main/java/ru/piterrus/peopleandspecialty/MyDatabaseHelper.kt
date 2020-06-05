@@ -7,7 +7,6 @@ import android.provider.BaseColumns
 
 class MyDatabaseHelper(context: Context): SQLiteOpenHelper(context, "LP_STORAGE", null, 1) {
 
-
     object Entry : BaseColumns {
         const val TABLE_NAME = "persons"
         const val PERSON_F_NAME = "F_NAME"

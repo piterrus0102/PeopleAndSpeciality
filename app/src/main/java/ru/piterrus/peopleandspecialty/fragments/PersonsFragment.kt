@@ -8,6 +8,7 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import ru.piterrus.peopleandspecialty.DateManager
 import ru.piterrus.peopleandspecialty.MainActivity.Companion.setOfPersonsFromDB
 import ru.piterrus.peopleandspecialty.MainActivity.Companion.tempPerson
 import ru.piterrus.peopleandspecialty.MainActivity.Companion.tempSpeciality
@@ -41,7 +42,7 @@ class PersonsFragment: Fragment() {
                     tableRow.setPadding(5,5,5,5)
 
                     val textOfMessage = TextView(activity)
-                    val convertToAge = convertToAge(i.birthday!!)
+                    val convertToAge = DateManager(i.birthday!!).convertFromDMYToAge()
                     val ageToInt = convertToAge.toInt()
                     if(ageToInt != 0) {
                         if(ageToInt % 10 in 5..9 || ageToInt % 10 == 0) {
@@ -75,22 +76,6 @@ class PersonsFragment: Fragment() {
                     tableOfPersons.addView(tableRow)
                 }
             }
-        }
-    }
-
-    fun convertToAge(date: String): Long{
-        try {
-            val formatter = SimpleDateFormat("dd.MM.yyyy")
-            val d1 = formatter.parse(date).time
-            val d2 = System.currentTimeMillis()
-            val d3 = (d2-d1)
-            val d4 = 365*24*60*60
-            val d5 = d3 / d4 / 1000
-            return d5
-        } catch (e: IllegalArgumentException){
-            return 0
-        } catch (e: ParseException){
-            return 0
         }
     }
 }
